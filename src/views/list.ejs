@@ -1,0 +1,67 @@
+<%- include('partials/header'); -%>
+<%- include('partials/navigator'); -%>
+
+<div class="container my-3">
+    <div class="row">
+        <% users.forEach(function(user,indice){%>
+        <div class="col-lg-3 mb-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3><%=user.nickName%></h3>
+                </div>
+                <div class="card-body">
+                    <h3><%=user.name%></h3>
+                    <h3><%=user.lastName%></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="d-grid">
+                        <a href="/delete/<%=user._id %>" class="btn btn-danger">Delete</a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=user._id %>">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal<%=user._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update form</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="/update/<%=user._id %>" method="post">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" name="name" id="name" class="form-control" value="<%=user.name%>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lastName" class="form-label">LastName</label>
+                                        <input type="text" name="lastName" id="lastName" class="form-control" value="<%=user.lastName%>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nickName" class="form-label">NickName</label>
+                                        <input type="text" name="nickName" id="nickName" class="form-control" value="<%=user.nickName%>">
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-info">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%})%>
+    </div>
+</div>
+
+
+<%- include('partials/footer'); -%>
